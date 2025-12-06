@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu du Pendu</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pendu.css">
+</head>
+<body>
+    <div id="whole">
+        <a class="linkstart" href="../index.html">← Retour à l'accueil</a><br>
+        <p id="word"></p><br>
+        <p>Erreurs: <span id="incorrect-guesses"></span></p>
+        <input placeholder="Veuillez mettre une lettre" type="text" id="letter" maxlength="1" /><br>
+        <button id="guess-btn">Deviner</button>
+        <p id="test"></p>
+        <button id="retry">Rejouer ⟲</button><br>
+    </div>
+    <script src="../js/pendu.js"></script>
+</body>
+</html>

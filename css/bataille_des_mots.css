@@ -1,0 +1,47 @@
+#deck {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 150px;
+    height: 150px;
+    background: grey;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    user-select: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.red{
+    background-color:red;
+}
+
+.green{
+    background-color:green;
+}
+
+button{
+    width: 150px;
+    height:50px;
+    color:white;
+    background-color: #0A2A86;
+    border-radius: 10px;
+    border:none;
+    cursor:pointer;
+    font-size:120%;
+    margin:50px;
+}
+
+button:hover{
+    background-color: #6E5CC2;
+}
