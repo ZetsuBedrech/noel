@@ -3,37 +3,49 @@ function Start() {
   const deck = document.getElementById("deck");
   deck.innerHTML = "";
 
-  // Fonction utilitaire : tire une lettre unique
   function pickUniqueLetter(pool) {
     const index = Math.floor(Math.random() * pool.length);
-    return pool.splice(index, 1)[0]; // Retire la lettre du pool
+    return pool.splice(index, 1)[0];
   }
 
-  // Couleurs : 2 rouges, 2 verts
   const colors = ["red", "red", "green", "green"];
-
-  // Liste de lettres qui vont être retirées à chaque tirage
   const letterPool = [...alphabetUpper];
 
-  // Création des cartes avec lettres uniques
   let cards = colors.map(color => ({
     letter: pickUniqueLetter(letterPool),
     color
   }));
 
-  // Mélange
   cards = shuffle(cards);
 
-  // Génération HTML
+  // Génération HTML : carte = container + front + back
   for (const cardData of cards) {
     const card = document.createElement("div");
-    card.className = `card ${cardData.color}`;
-    card.textContent = cardData.letter;
+    card.className = "card";
+
+    const inner = document.createElement("div");
+    inner.className = "card-inner";
+
+    const front = document.createElement("div");
+    front.className = `card-face front ${cardData.color}`;
+    front.textContent = cardData.letter;
+
+    const back = document.createElement("div");
+    back.className = "card-face back";
+
+    inner.appendChild(front);
+    inner.appendChild(back);
+    card.appendChild(inner);
     deck.appendChild(card);
   }
+
+  // Flip après un mini délai
+  setTimeout(() => {
+    document.querySelectorAll(".card").forEach(c => c.classList.add("flip"));
+  }, 50);
 }
 
-// Mélange avec crypto (fiable)
+// Shuffle
 function shuffle(array) {
   const arr = [...array];
   for (let i = arr.length - 1; i > 0; i--) {

@@ -1,84 +1,95 @@
 let wordToGuess = "";
 let displayedWord = [];
 let incorrectGuesses = [];
-let attemptsLeft = 6; // Nombre d'essais avant de perdre
-const test = document.getElementById("test");
+let attemptsLeft = 6;
+
 const wordElement = document.getElementById("word");
 const incorrectGuessesElement = document.getElementById("incorrect-guesses");
 const guessButton = document.getElementById("guess-btn");
 const letterInput = document.getElementById("letter");
+const retry = document.getElementById("retry");
 
-// Fonction pour récupérer un mot depuis l'API
+// 🔤 Fonction pour retirer les accents (É → E, À → A…)
+function normalizeLetter(letter) {
+    return letter.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+// 🎯 Récupère un mot depuis l’API
 function fetchWord() {
     fetch("https://trouve-mot.fr/api/random/1")
         .then((response) => response.json())
         .then((words) => {
-            wordToGuess = words[0].name.toUpperCase();  // Récupère le mot et le met en majuscules
-            console.log("Mot à deviner:", wordToGuess);
+            wordToGuess = words[0].name.toUpperCase(); // mot avec accents
+            console.log("Mot à deviner :", wordToGuess);
             initializeGame();
         })
         .catch((error) => {
-            console.error("Erreur lors de la récupération des mots :", error);
+            console.error("Erreur API :", error);
         });
 }
 
-// Initialise le jeu avec le mot récupéré
+// 🔄 Initialise le jeu
 function initializeGame() {
-    displayedWord = Array(wordToGuess.length).fill('_');
-    wordElement.textContent = displayedWord.join(' '); // Affiche les underscores
+    displayedWord = Array(wordToGuess.length).fill("_");
     incorrectGuesses = [];
-    attemptsLeft = 6; // Reset des tentatives
+    attemptsLeft = 6;
+
+    wordElement.textContent = displayedWord.join(" ");
     incorrectGuessesElement.textContent = "";
-    letterInput.value = ''; // Réinitialise le champ de saisie
-    letterInput.focus(); // Place le curseur dans le champ de saisie
+    letterInput.value = "";
+    letterInput.focus();
 }
 
-// Vérifie la lettre entrée et met à jour l'affichage
+// 📝 Vérifie une lettre
 function makeGuess() {
-    const guess = letterInput.value.toUpperCase();
-    letterInput.value = ''; // Efface la saisie
+    const rawInput = letterInput.value.toUpperCase();
+    const guess = normalizeLetter(rawInput); // E → compare aussi É, È, Ê, Ë
+    letterInput.value = "";
 
-    if (guess.length === 1 && /^[A-Z]$/.test(guess)) { // Vérifie si c'est une lettre valide
-        if (incorrectGuesses.includes(guess) || displayedWord.includes(guess)) {
-            alert("Vous avez déjà deviné cette lettre.");
-            return;
+    // Vérifie entrée valide
+    if (guess.length !== 1 || !/^[A-Z]$/.test(guess)) {
+        alert("Veuillez entrer une lettre valide.");
+        return;
+    }
+
+    // Vérifie si déjà essayé
+    if (incorrectGuesses.includes(guess) || displayedWord.includes(rawInput)) {
+        alert("Vous avez déjà deviné cette lettre.");
+        return;
+    }
+
+    let found = false;
+
+    // Teste toutes les lettres du mot (même accentuées)
+    for (let i = 0; i < wordToGuess.length; i++) {
+        if (normalizeLetter(wordToGuess[i]) === guess) {
+            displayedWord[i] = wordToGuess[i]; // garde l'accent réel
+            found = true;
         }
+    }
 
-        if (wordToGuess.includes(guess)) {
-            // Mise à jour des underscores avec la lettre devinée
-            for (let i = 0; i < wordToGuess.length; i++) {
-                if (wordToGuess[i] === guess) {
-                    displayedWord[i] = guess;
-                }
-            }
+    wordElement.textContent = displayedWord.join(" ");
 
-            wordElement.textContent = displayedWord.join(' '); // Affiche la nouvelle version du mot
-
-            // Vérifie si le mot est entièrement deviné
-            if (!displayedWord.includes('_')) {
-                alert("Bravo, vous avez gagné !");
-            }
-        } else {
-            // Si la lettre n'est pas dans le mot, l'ajoute aux mauvaises tentatives
-            incorrectGuesses.push(guess);
-            incorrectGuessesElement.textContent = incorrectGuesses.join(', ');
-
-            attemptsLeft--;
-            if (attemptsLeft === 0) {
-                alert("Désolé, vous avez perdu ! Le mot était : " + wordToGuess);
-            }
+    if (found) {
+        // gagné
+        if (!displayedWord.includes("_")) {
+            alert("Bravo, vous avez gagné !");
         }
     } else {
-        alert("Veuillez entrer une lettre valide.");
+        // Lettre incorrecte
+        incorrectGuesses.push(guess);
+        incorrectGuessesElement.textContent = incorrectGuesses.join(", ");
+
+        attemptsLeft--;
+        if (attemptsLeft === 0) {
+            alert("Perdu ! Le mot était : " + wordToGuess);
+        }
     }
 }
 
-// rejouer
-const retry = document.getElementById('retry');
+// ▶️ Boutons
+guessButton.addEventListener("click", makeGuess);
 retry.addEventListener("click", fetchWord);
 
-// Ajout d'un écouteur pour le bouton "Deviner"
-guessButton.addEventListener("click", makeGuess);
-
-// Démarre le jeu en récupérant un mot
+// ▶️ Démarrage
 fetchWord();
