@@ -18,6 +18,10 @@ function Start() {
     "JEUX VIDEO",
     "FILMS / SERIES",
     "ANIMAUX MARINS",
+    "LANGUES",
+    "MARQUES",
+    "APPLICATIONS",
+    "VILLES",
     "INSECTES"
 ];
 

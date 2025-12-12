@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de l'Anagramme</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/anagramme.css">
+</head>
+<body>
+    <div id="whole">
+        <a class="linkstart" href="../index.html">← Retour à l'accueil</a><br>
+
+        <!-- Mot mélangé -->
+        <p id="word"></p><br>
+
+        <!-- Input pour deviner le mot entier -->
+        <input type="text" id="letter" placeholder="Devinez le mot" /><br>
+
+        <!-- Boutons -->
+        <button id="guess-btn">Deviner</button>
+        <button id="giveUp">Abandon</button>
+        <p id="test"></p>
+        <button id="retry">Rejouer ⟲</button><br>
+    </div>
+
+    <script src="../js/anagramme.js"></script>
+</body>
+</html>

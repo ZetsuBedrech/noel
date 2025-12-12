@@ -1,0 +1,48 @@
+#timer{
+    margin-bottom:20px;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 150px);
+    grid-gap: 10px;
+    justify-content: center;
+}
+
+.card {
+    width: 150px;
+    height: 150px;
+    background-color: #2d2d2d;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s;
+}
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    border-radius:8px;
+}
+
+.card:active {
+    transform: scale(0.98);
+}
+
+@media screen and (max-width: 800px) {
+    .game-board {
+        grid-template-columns: repeat(3, 110px);
+        grid-gap: 10px;
+    }
+
+    .card{
+        width:100px;
+        height:100px;
+    }
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bataille des mots</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/imposteur.css">
+</head>
+<body>
+    <div id="whole">
+        <a class="linkstart" href="../index.html">← Retour à l'accueil</a>
+        <p>Tous les joueurs sauf un ont le même mot. Devinez qui est l'imposteur !</p>
+        <input type="number" id="numPlayers" min="3" max="10" value="4"><br>
+        <button id="start-btn">Démarrer</button>
+        <button id="next-btn">Prochain joueur</button>
+        <button id="retry">Rejouer</button>
+        <button id="result">Résultat</button>
+        <div id="resultPopUp"></div>
+        <div id="players"></div>
+    </div>
+    <script src="../js/imposteur.js"></script>
+</body>
+</html>

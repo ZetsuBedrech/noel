@@ -50,19 +50,3 @@
 
 .red.front { background-color: red; }
 .green.front { background-color: green; }
-
-button{
-    width: 150px;
-    height:50px;
-    color:white;
-    background-color: #0A2A86;
-    border-radius: 10px;
-    border:none;
-    cursor:pointer;
-    font-size:120%;
-    margin:50px;
-}
-
-button:hover{
-    background-color: #6E5CC2;
-}
