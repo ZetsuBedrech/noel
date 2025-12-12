@@ -30,5 +30,7 @@
   { "main": "PARIS", "impostor": "MARSEILLE" },
   { "main": "FRANCE", "impostor": "ALLEMAGNE" },
   { "main": "MACRON", "impostor": "NAPOLEON" },
+  { "main": "ANGE", "impostor": "DEMON" },
+  { "main": "CHRETIEN", "impostor": "MUSULMAN" },
   { "main": "ORDINATEUR", "impostor": "PORTABLE" }
 ]
