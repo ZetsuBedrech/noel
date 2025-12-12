@@ -12,7 +12,9 @@
 .card {
     width: 150px;
     height: 150px;
-    background-color: #2d2d2d;
+    background-image: url(../images/card_pattern.jpg);
+    background-position: center;
+    background-size: cover;
     border-radius: 8px;
     display: flex;
     justify-content: center;

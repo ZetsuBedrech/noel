@@ -90,14 +90,6 @@ document.getElementById("next-btn")?.addEventListener("click", () => {
     showNextPlayer();
 });
 
-// Rejouer
-document.getElementById("retry")?.addEventListener("click", () => {
-    clearResult();
-    currentPlayerIndex = 0;
-    assignWords(numPlayers);
-    showNextPlayer();
-});
-
 // Résultat final
 document.getElementById("result").addEventListener("click", () => {
     const impostorIndex = playersWords.findIndex(word => word !== playersWords[0]);
