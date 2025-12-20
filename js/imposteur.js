@@ -14,7 +14,16 @@ fetch("../json/imposteur.json")
 // Tirer un mot principal et son imposteur au hasard
 function pickRandomPair() {
     const pair = wordsList[Math.floor(Math.random() * wordsList.length)];
-    return pair; // {main: "...", impostor: "..."}
+
+    // 1 chance sur 2 d'inverser
+    if (Math.random() < 0.5) {
+        return {
+            main: pair.impostor,
+            impostor: pair.main
+        };
+    }
+
+    return pair;
 }
 
 // Préparer les mots pour tous les joueurs
